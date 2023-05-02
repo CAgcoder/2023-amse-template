@@ -40,7 +40,7 @@ get DATA:"Bevölkerungsentwicklung nach Geschlecht"from Datasource 2
 
 1.Data Collection : This work package involves collecting data on the type and quantity of vehicles in Münster as well as population and population composition data.(Issue: Data ingestion)
 
-2. Data Cleansing & Transformation:This work package involves the collected data that needs to be cleaned and formatted for analysis. (Issue: Data Cleansing & Transformation)
+2. Data Cleansing & Transformation:This work package involves the collected data that needs to be cleaned and formatted for analysis. (Issue: Data Cleansing &Transformation)
 
 3.Data Storage:Save data in the right format in a directory where you can find it again.(Issue: Data Storage) 
 
