@@ -22,10 +22,9 @@ Datasource1: Mobilithek
 * 
 Datasource2: opendata.stadt-muenster
 * Metadata URL: https://opendata.stadt-muenster.de/dataset/statistik-bev%C3%B6lkerungsentwicklung
-* Data URL:https://www.stadt-muenster.de/fileadmin/user_upload/stadt-muenster/61_stadtentwicklung/pdf/sms/05515000_csv_bevoelkerungsentwicklung_geschlecht.csv
-*          https://www.stadt-muenster.de/fileadmin/user_upload/stadt-muenster/61_stadtentwicklung/pdf/sms/05515000_csv_bevoelkerungsentwicklung_altersgruppen.csv
-*          https://www.stadt-muenster.de/fileadmin/user_upload/stadt-
-           muenster/61_stadtentwicklung/pdf/sms/05515000_csv_bevoelkerungsentwicklung_staatsangehoerigkeit.csv
+* Data URL:1:https://www.stadt-muenster.de/fileadmin/user_upload/stadt-muenster/61_stadtentwicklung/pdf/sms/05515000_csv_bevoelkerungsentwicklung_geschlecht.csv
+*          2:https://www.stadt-muenster.de/fileadmin/user_upload/stadt-muenster/61_stadtentwicklung/pdf/sms/05515000_csv_bevoelkerungsentwicklung_altersgruppen.csv
+*          3:https://www.stadt-muenster.de/fileadmin/user_upload/stadt-muenster/61_stadtentwicklung/pdf/sms/05515000_csv_bevoelkerungsentwicklung_staatsangehoerigkeit.csv
 * Data Type: CSV
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
