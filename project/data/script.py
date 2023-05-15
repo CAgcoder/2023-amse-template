@@ -52,7 +52,7 @@ def csv_preprocessing(df):
 
 
 def store_data(df, name):
-    conn = sqlite3.connect("data/mydatabase.db")
+    conn = sqlite3.connect("project/data/mydatabase.db")
     df.to_sql(name, conn, if_exists="replace", index=False)
     conn.close()
 
