@@ -21,17 +21,7 @@ pipeline AirportsPipeline {
 	}
 
 	pipe {
-		from: AirportsCSVInterpreter;
-		to: NameHeaderWriter;
-	}
-
-	block NameHeaderWriter oftype CellWriter {
-		at: cell A1;
-		write: ["name"];
-	}
-
-	pipe {
-	   	from: NameHeaderWriter;
+	   	from: AirportsCSVInterpreter;
 	   	to: AirportsTableInterpreter;
 	}
 
