@@ -20,17 +20,17 @@ def excel_preprocessing(df):
     df.iloc[:, 1].fillna(method="ffill", inplace=True)
 
     columns = list(df.columns)
-    previous_value = "begin"
+    previous_value = "Begin"
 
     for i, value in enumerate(columns):
         if value == "Unnamed: {}".format(i):
             if i > 2:
-                columns[i] = previous_value + "{}".format(i - 3)
+                columns[i] = previous_value + "{}".format(i)
             else:
                 columns[i] = previous_value + "{}".format(i)
         else:
             previous_value = value
-            columns[i] = value + "{}".format(0)
+            columns[i] = value + "{}".format(i)
     df.columns = columns
 
     return df
@@ -52,7 +52,7 @@ def csv_preprocessing(df):
 
 
 def store_data(df, name):
-    conn = sqlite3.connect("project/data/mydatabase.db")
+    conn = sqlite3.connect("project/data/mydatabase.sqlite")
     df.to_sql(name, conn, if_exists="replace", index=False)
     conn.close()
 
@@ -63,13 +63,13 @@ def main():
     store_data(df1, "Fahrzeugbestand_Excel")
     df2 = csv_extraction(url2)
     csv_preprocessing(df2)
-    store_data(df2, "mit geschlecht")
+    store_data(df2, "Bevoelkerungsentwicklung_mit_geschlecht")
     df3 = csv_extraction(url3)
     csv_preprocessing(df3)
-    store_data(df3, "mit altersgruppen")
+    store_data(df3, "Bevoelkerungsentwicklung_mit_altersgruppen")
     df4 = csv_extraction(url4)
     csv_preprocessing(df4)
-    store_data(df4, "mit staatsangehoerigkeit")
+    store_data(df4, "Bevoelkerungsentwicklung_mit_staatsangehoerigkeit")
 
 
 if __name__ == "__main__":
