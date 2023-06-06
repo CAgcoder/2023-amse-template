@@ -18,14 +18,11 @@ def drop_invalid_row(df, column_name, valid):
     if isinstance(valid, list) and all(isinstance(item, str) for item in valid):
         df = df.drop(df[~df[column_name].isin(valid)].index)
         return df
-    # elif isinstance(valid, (float, int)):
-    #     df = df.drop(
-    #         df[df[column_name].str.replace(",", ".").astype(float) < -valid].index
-    #     )
-    #     df = df.drop(
-    #         df[df[column_name].str.replace(",", ".").astype(float) > valid].index
-    #     )
-    #     return df
+    elif isinstance(valid, (float, int)):
+        df[column_name] = df[column_name].str.replace(",", ".").astype(float)
+        df = df.drop(df[df[column_name] < -valid].index)
+        df = df.drop(df[df[column_name] > valid].index)
+        return df
     elif column_name == "IFOPT":
         df = df.drop(df[~df[column_name].str.match(valid, na=False)].index)
         return df
@@ -33,7 +30,6 @@ def drop_invalid_row(df, column_name, valid):
 
 def store_data(df, name, address, data_type):
     conn = sqlite3.connect(address)
-    # data_type = {'ID': 'BIGINT', 'Verkehr': 'TEXT', 'Laenge': 'FLOAT', 'Breite': 'FLOAT','IFOPT': 'TEXT'}
     df.to_sql(name, conn, if_exists="replace", index=False, dtype=data_type)
     conn.close()
 
@@ -44,13 +40,14 @@ def main():
     df1 = drop_colum(df, "Status")
     valid_Verkehr = ["RV", "FV", "nur DPN"]
     df2 = drop_invalid_row(df1, "Verkehr", valid_Verkehr)
-    df3 = df2.drop(df2[df2["Laenge"].str.replace(",", ".").astype(float) < -90].index)
-    df3 = df3.drop(df3[df3["Laenge"].str.replace(",", ".").astype(float) > 90].index)
-    df4 = df3.drop(df3[df3["Breite"].str.replace(",", ".").astype(float) < -90].index)
-    df4 = df4.drop(df4[df4["Breite"].str.replace(",", ".").astype(float) > 90].index)
 
-    # df3 = drop_invalid_row(df2, "Laenge", 90)
-    # df4 = drop_invalid_row(df3, "Breite", 90)
+    # df3 = df2.drop(df2[df2["Laenge"].str.replace(",", ".").astype(float) < -90].index)
+    # df3 = df3.drop(df3[df3["Laenge"].str.replace(",", ".").astype(float) > 90].index)
+    # df4 = df3.drop(df3[df3["Breite"].str.replace(",", ".").astype(float) < -90].index)
+    # df4 = df4.drop(df4[df4["Breite"].str.replace(",", ".").astype(float) > 90].index)
+
+    df3 = drop_invalid_row(df2, "Laenge", 90)
+    df4 = drop_invalid_row(df3, "Breite", 90)
     df5 = drop_invalid_row(df4, "IFOPT", r"^[A-Za-z]{2}:\d+:\d+(?::\d+)?$")
     store_data(
         df5,
