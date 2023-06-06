@@ -40,12 +40,6 @@ def main():
     df1 = drop_colum(df, "Status")
     valid_Verkehr = ["RV", "FV", "nur DPN"]
     df2 = drop_invalid_row(df1, "Verkehr", valid_Verkehr)
-
-    # df3 = df2.drop(df2[df2["Laenge"].str.replace(",", ".").astype(float) < -90].index)
-    # df3 = df3.drop(df3[df3["Laenge"].str.replace(",", ".").astype(float) > 90].index)
-    # df4 = df3.drop(df3[df3["Breite"].str.replace(",", ".").astype(float) < -90].index)
-    # df4 = df4.drop(df4[df4["Breite"].str.replace(",", ".").astype(float) > 90].index)
-
     df3 = drop_invalid_row(df2, "Laenge", 90)
     df4 = drop_invalid_row(df3, "Breite", 90)
     df5 = drop_invalid_row(df4, "IFOPT", r"^[A-Za-z]{2}:\d+:\d+(?::\d+)?$")
@@ -59,6 +53,7 @@ def main():
             "Laenge": "FLOAT",
             "Breite": "FLOAT",
             "IFOPT": "TEXT",
+            "Betreiber_Nr": "INT",
         },
     )
 
