@@ -49,8 +49,8 @@ def main():
     df5 = drop_invalid_row(df4, "IFOPT", r"^[A-Za-z]{2}:\d+:\d+(?::\d+)?$")
     store_data(
         df5,
-        "trainstop_data",
-        "trainstop_data.sqlite",
+        "trainstops",
+        "trainstops.sqlite",
         {
             "ID": "BIGINT",
             "Verkehr": "TEXT",
