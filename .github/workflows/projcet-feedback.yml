@@ -28,5 +28,5 @@ jobs:
       # Run project feedback
       - name: Project feedback
         run: |
-          chmod +x proj/test.sh
+          chmod +x projct/datapipline_test.sh
           ./project/datapipline_test.sh
