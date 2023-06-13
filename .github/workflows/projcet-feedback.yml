@@ -1,0 +1,39 @@
+name: Project Feedback
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - project/**
+
+jobs:
+  project_feedback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: main
+
+      - name: Checkout project feedback
+        uses: actions/checkout@v3
+        with:
+          repository: CAgcoder/2023-amse-template
+          path: project
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      # Install python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # Run project feedback
+      - name: Project feedback
+        run: |
+          ./project/datapipline_test.sh
