@@ -1,14 +1,14 @@
-name: Exercise Feedback
+name: Project Feedback
 
 on:
   push:
     branches:
       - main
     paths:
-      - exercises/**
+      - project/**
 
 jobs:
-  exercise-feedback:
+  project_feedback:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,21 +16,16 @@ jobs:
         with:
           path: main
 
-      - name: Checkout exercise feedback
+      - name: Checkout project feedback
         uses: actions/checkout@v3
         with:
-          repository: jvalue/amse-exercise-feedback
-          path: grading
+          repository: CAgcoder/2023-amse-template
+          path: test
 
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-
-      # Install jayvee
-      - name: Set up Jayvee
-        run: |
-          ./grading/ci/setup_jayvee.sh
 
       # Install python
       - name: Set up Python 3.11
@@ -38,7 +33,7 @@ jobs:
         with:
           python-version: 3.11
 
-      # Run exercise feedback
-      - name: Exercise feedback
+      # Run project feedback
+      - name: Project feedback
         run: |
-          ./grading/ci/run_grading.sh
+          ./test/project/datapipline_test.sh

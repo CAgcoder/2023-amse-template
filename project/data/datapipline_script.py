@@ -51,8 +51,8 @@ def csv_preprocessing(df):
     return df
 
 
-def store_data(df, name):
-    conn = sqlite3.connect("project/data/mydatabase.sqlite")
+def store_data(df, name, databasename):
+    conn = sqlite3.connect(databasename)
     df.to_sql(name, conn, if_exists="replace", index=False)
     conn.close()
 
@@ -60,16 +60,17 @@ def store_data(df, name):
 def main():
     df1 = excel_extraction(url1)
     excel_preprocessing(df1)
-    store_data(df1, "Fahrzeugbestand_Excel")
+    databasename = "data/mydatabase.sqlite"
+    store_data(df1, "Fahrzeugbestand_Excel", databasename)
     df2 = csv_extraction(url2)
     csv_preprocessing(df2)
-    store_data(df2, "Bevoelkerungsentwicklung_mit_geschlecht")
+    store_data(df2, "Bevoelkerungsentwicklung_mit_geschlecht", databasename)
     df3 = csv_extraction(url3)
     csv_preprocessing(df3)
-    store_data(df3, "Bevoelkerungsentwicklung_mit_altersgruppen")
+    store_data(df3, "Bevoelkerungsentwicklung_mit_altersgruppen", databasename)
     df4 = csv_extraction(url4)
     csv_preprocessing(df4)
-    store_data(df4, "Bevoelkerungsentwicklung_mit_staatsangehoerigkeit")
+    store_data(df4, "Bevoelkerungsentwicklung_mit_staatsangehoerigkeit", databasename)
 
 
 if __name__ == "__main__":
