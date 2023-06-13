@@ -60,7 +60,7 @@ def store_data(df, name, databasename):
 def main():
     df1 = excel_extraction(url1)
     excel_preprocessing(df1)
-    databasename = "data/mydatabase.sqlite"
+    databasename = "project/data/mydatabase.sqlite"
     store_data(df1, "Fahrzeugbestand_Excel", databasename)
     df2 = csv_extraction(url2)
     csv_preprocessing(df2)
