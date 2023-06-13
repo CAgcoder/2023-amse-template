@@ -8,7 +8,7 @@ on:
       - project/**
 
 jobs:
-  project_feedback:
+  project-feedback:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,4 +36,4 @@ jobs:
       # Run project feedback
       - name: Project feedback
         run: |
-          ./project/datapipline_test.sh
+          .project/datapipline_test.sh
