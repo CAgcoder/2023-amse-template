@@ -36,4 +36,4 @@ jobs:
       # Run project feedback
       - name: Project feedback
         run: |
-          .project/datapipline_test.sh
+          ./project/datapipline_test.sh
