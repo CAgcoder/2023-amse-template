@@ -1,0 +1,126 @@
+pipeline CarsPipeline {
+
+	block CarsExtractor oftype HttpExtractor { url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv"; }
+
+	pipe {
+		from: CarsExtractor;
+		to: CarsTextFileInterpreter;
+	}
+
+	block CarsTextFileInterpreter oftype TextFileInterpreter {
+		encoding :  "ISO-8859-1";
+
+	}
+
+	pipe {
+		from: CarsTextFileInterpreter;
+		to: CarsCSVInterpreter;
+	}
+
+	block CarsCSVInterpreter oftype CSVInterpreter {
+		delimiter: ";";
+	}//become sheet
+
+	// constraint CarConstrain oftype AllowlistConstraint {
+  	// allowlist: ["A1:C*","M1:M*","W1:W*","AG1:AG1*","AQ1:AQ*","BA1:BA*","BQ1:BQ*","BU1:BU*"];
+	// }
+	
+	pipe {
+	   	from: CarsCSVInterpreter;
+	   	to: CarsCellwriter1;
+	}
+	block CarsCellwriter1 oftype CellWriter{
+		at: range A1:C1;
+		write:["date","CIN","name"];
+	}
+	pipe {
+	   	from: CarsCellwriter1;
+	   	to: CarsCellwriter2;
+	}
+	block CarsCellwriter2 oftype CellWriter{
+		at: cell M1;
+		write:["petrol"];
+	}
+	pipe {
+	   	from: CarsCellwriter2;
+	   	to: CarsCellwriter3;
+	}
+	block CarsCellwriter3 oftype CellWriter{
+		at: cell W1;
+		write:["disel"];
+	}
+	pipe {
+	   	from: CarsCellwriter3;
+	   	to: CarsCellwriter4;
+	}
+	block CarsCellwriter4 oftype CellWriter{
+		at: cell AG1;
+		write:["gas"];
+	}
+	pipe {
+	   	from: CarsCellwriter4;
+	   	to: CarsCellwriter5;
+	}
+	block CarsCellwriter5 oftype CellWriter{
+		at: cell AQ1;
+		write:["electro"];
+	}
+	pipe {
+	   	from: CarsCellwriter5;
+	   	to: CarsCellwriter6;
+	}
+	block CarsCellwriter6 oftype CellWriter{
+		at: cell BA1;
+		write:["hybird"];
+	}
+	pipe {
+	   	from: CarsCellwriter6;
+	   	to: CarsCellwriter7;
+	}
+	block CarsCellwriter7 oftype CellWriter{
+		at: cell BK1;
+		write:["plugInHybrid"];
+	}
+	pipe {
+	   	from: CarsCellwriter7;
+	   	to: CarsCellwriter8;
+	}
+	block CarsCellwriter8 oftype CellWriter{
+		at: cell BU1;
+		write:["others"];
+	}
+	pipe {
+	   	from: CarsCellwriter8;
+	   	to: CarsTableInterpreter;
+	}
+
+	block CarsTableInterpreter oftype TableInterpreter {
+    	header:true;
+    	columns: [
+			"date" oftype text,
+			"CIN" oftype text,
+			"name" oftype text,
+			"petrol" oftype integer,
+			"diesel" oftype integer,
+			"gas" oftype integer,
+			"electro" oftype integer,
+			"hybird" oftype integer,
+			"plugInHybrid" oftype integer,
+			"others" oftype integer
+    	];
+    }
+
+	pipe {
+		from: CarsTableInterpreter;
+		to: CarsLoader;
+	}
+	block CarsLoader oftype SQLiteLoader {
+		table: "cars";
+		file: "./cars.sqlite";
+	}
+
+}
+
+
+
+
