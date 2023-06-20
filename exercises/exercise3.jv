@@ -47,7 +47,7 @@ pipeline CarsPipeline {
 	}
 	block CarsCellwriter3 oftype CellWriter{
 		at: cell W1;
-		write:["disel"];
+		write:["diesel"];
 	}
 	pipe {
 	   	from: CarsCellwriter3;
@@ -71,7 +71,7 @@ pipeline CarsPipeline {
 	}
 	block CarsCellwriter6 oftype CellWriter{
 		at: cell BA1;
-		write:["hybird"];
+		write:["hybrid"];
 	}
 	pipe {
 	   	from: CarsCellwriter6;
@@ -104,7 +104,7 @@ pipeline CarsPipeline {
 			"diesel" oftype integer,
 			"gas" oftype integer,
 			"electro" oftype integer,
-			"hybird" oftype integer,
+			"hybrid" oftype integer,
 			"plugInHybrid" oftype integer,
 			"others" oftype integer
     	];
