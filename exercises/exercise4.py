@@ -66,8 +66,8 @@ def csv():
 
 
 def store_data(df):
-    database_name = "exercises/ temperatures.sqlite"
-    table_name = " temperatures"
+    database_name = "temperatures.sqlite"
+    table_name = "temperatures.sqlite"
     conn = sqlite3.connect(database_name)
     df.to_sql(table_name, conn, if_exists="replace", index=False)
     conn.close()
