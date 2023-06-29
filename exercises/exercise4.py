@@ -3,10 +3,10 @@ import zipfile
 import pandas as pd
 import sqlite3
 
-
+# Step 1: Download and unzip the data
 zip_file_url = "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip"
 data_file_name = "data.csv"
-zip_file_name = "mowesta-dataset.zip"
+zip_file_name = "exercises/mowesta-dataset.zip"
 
 urllib.request.urlretrieve(zip_file_url, zip_file_name)
 
@@ -15,7 +15,7 @@ with zipfile.ZipFile(zip_file_name) as zip_ref:
 
 
 df = pd.read_csv(
-    "data.csv",
+    "exercises/data.csv",
     usecols=range(15),
     encoding="utf-8",
     sep=";",
@@ -64,7 +64,7 @@ df["Batterietemperatur"] = df["Batterietemperatur"].round(2)
 df = df[df["Geraet"] > 0]
 df = df[df["Geraet"] > 0]
 
-database_name = "temperatures.sqlite"
+database_name = "exercises/temperatures.sqlite"
 table_name = "temperatures"
 
 conn = sqlite3.connect(database_name)
