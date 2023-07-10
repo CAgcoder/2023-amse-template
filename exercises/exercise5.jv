@@ -78,7 +78,7 @@ pipeline GTFSPipeline {
 
 	block GTFSLoader oftype SQLiteLoader {
 		table: "stops";
-		file: "gfts.sqlite";
+		file: "gtfs.sqlite";
 
 	}
 }
